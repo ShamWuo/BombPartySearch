@@ -1,30 +1,35 @@
-    async function findWords() {
-      const input = document.getElementById("Input").value.toLowerCase();
-      const resultList = document.getElementById("resultList");
-      resultList.innerHTML = "";
+async function findWords() {
+  const input = document.getElementById("Input").value.toLowerCase();
+  const resultList = document.getElementById("resultList");
+  const filter = parseInt(document.getElementById("lengthFilter").value);
+  resultList.innerHTML = "";
 
-      if (!input) return;
+  if (!input) return;
 
-      const response = await fetch(`https://api.datamuse.com/words?sp=*${input}*`);
-      const data = await response.json();
+  const response = await fetch(`https://api.datamuse.com/words?sp=*${input}*`);
+  const data = await response.json();
 
-      const words = data.map(item => item.word);
-      words.sort((a, b) => a.length - b.length);
+  let words = data.map(item => item.word);
+  words.sort((a, b) => a.length - b.length);
 
-      if (words.length === 0) {
-        resultList.innerHTML = "<li>too bad.....</li>";
-        return;
-      }
+  if (filter > 0) {
+    words = words.filter(word => word.length === filter);
+  }
 
-      for (const word of words) {
-        const li = document.createElement("li");
-        li.textContent = word;
-        resultList.appendChild(li);
-      }
-    }
+  if (words.length === 0) {
+    resultList.innerHTML = "<li>too bad.....</li>";
+    return;
+  }
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        findWords();
-      }
-    });
+  for (const word of words) {
+    const li = document.createElement("li");
+    li.textContent = word;
+    resultList.appendChild(li);
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    findWords();
+  }
+});
