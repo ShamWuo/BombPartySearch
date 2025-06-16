@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Word Finder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>Enter Letter Sequence:</h2>
-  <input type="text" id="Input" placeholder="whtDOLLARSOGN!!!">
+  <input type="text" id="Input" placeholder="Enter sequence of letters.">
   <select id="lengthFilter">
     <option value="0">All Lengths</option>
     <option value="2">2 Letters</option>
@@ -19,6 +21,7 @@
     <option value="9">9 Letters</option>
   </select>
   <button onclick="findWords()">Search</button>
+  <div id="loading" class="hidden">Loading...</div>
   <ul id="resultList"></ul>
   <script src="script.js"></script>
 </body>
