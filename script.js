@@ -2,6 +2,7 @@ async function findWords() {
   const input = document.getElementById("Input").value.toLowerCase();
   const resultList = document.getElementById("resultList");
   const filter = parseInt(document.getElementById("lengthFilter").value);
+  const condition = document.getElementById("lengthCondition").value;
   resultList.innerHTML = "";
   const loading = document.getElementById("loading");
   loading.classList.remove("hidden");
@@ -19,8 +20,13 @@ async function findWords() {
     let words = data.map(item => item.word);
     words.sort((a, b) => a.length - b.length);
 
-    if (filter > 0) {
+    
+    if (condition === "only" && filter > 0) {
       words = words.filter(word => word.length === filter);
+    } else if (condition === "higher" && filter > 0) {
+      words = words.filter(word => word.length >= filter);
+    } else if (condition === "lower" && filter > 0) {
+      words = words.filter(word => word.length <= filter);
     }
 
     if (words.length === 0) {
@@ -36,7 +42,7 @@ async function findWords() {
       resultList.appendChild(li);
     }
   } catch (error) {
-    resultList.innerHTML = "<li>Error fetching words.</li>";
+    resultList.innerHTML = "<li>Error fetching words. </li>";
   } finally {
     loading.classList.add("hidden");
   }
@@ -56,5 +62,10 @@ function copyToClipboard(word) {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     findWords();
-  } 
+  } else if (e.key >= '1' && e.key <= '9') {
+    const index = parseInt(e.key) - 1; // wth did i jus do bruh what am i doing
+    if (window.wordsList && window.wordsList[index]) {
+      copyToClipboard(window.wordsList[index]);
+    }
+  }
 });
