@@ -8,7 +8,8 @@
 </head>
 <body>
   <h2>Enter Letter Sequence:</h2>
-  <input type="text" id="Input" placeholder="Enter sequence of letters.">
+  <input type="text" id="Input" placeholder="Enter letters.">
+  
   <select id="lengthFilter">
     <option value="0">All Lengths</option>
     <option value="2">2 Letters</option>
@@ -20,6 +21,13 @@
     <option value="8">8 Letters</option>
     <option value="9">9 Letters</option>
   </select>
+
+  <select id="lengthCondition">
+    <option value="only">Only</option>
+    <option value="higher">Or Higher</option>
+    <option value="lower">Or Lower</option>
+  </select>
+
   <button onclick="findWords()">Search</button>
   <div id="loading" class="hidden">Loading...</div>
   <ul id="resultList"></ul>
