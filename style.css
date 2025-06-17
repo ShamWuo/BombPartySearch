@@ -28,7 +28,15 @@ h2 {
 #lengthFilter {
   position: fixed;
   top: 75px;
-  left: calc(50% - 270px);
+  left: calc(50% - 360px);
+  height: 40px;
+  font-size: 16px;
+}
+
+#lengthCondition {
+  position: fixed;
+  top: 75px;
+  left: calc(50% - 250px);
   height: 40px;
   font-size: 16px;
 }
