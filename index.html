@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A modern Word Finder with search history, favorites, and word details.">
@@ -10,21 +9,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Removed Font Awesome icons for cleaner UI -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo-container">
-                <img src="n/a" alt="Word Finder Logo" class="logo">
+                <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Word Finder Logo" class="logo">
                 <h1>Word Finder</h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#" id="nav-home" class="active"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#" id="nav-favorites"><i class="fas fa-star"></i> Favorites</a></li>
-                    <li><a href="#" id="nav-history"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#" id="nav-home" class="active">Home</a></li>
+                    <li><a href="#" id="nav-favorites">Favorites</a></li>
+                    <li><a href="#" id="nav-history">History</a></li>
                 </ul>
             </nav>
         </div>
@@ -65,13 +65,13 @@
                         </select>
 
                         <button id="searchBtn" class="primary-btn">
-                            <i class="fas fa-search"></i> Search
+                            Search
                         </button>
                     </div>
                 </div>
             </div>
             <div id="loading" class="loading hidden" role="status">
-                <i class="fas fa-spinner fa-spin"></i> Searching...
+                Searching...
             </div>
         </section>
 
@@ -82,3 +82,52 @@
         </section>
     </main>
 
+    <!-- History Sidebar -->
+    <aside id="historySidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Search History</h3>
+            <button class="close-sidebar">×</button>
+        </div>
+        <ul id="historyList"></ul>
+        <button id="clearHistoryBtn" class="secondary-btn">
+            Clear History
+        </button>
+    </aside>
+
+    <!-- Favorites Sidebar -->
+    <aside id="favoritesSidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Favorites</h3>
+            <button class="close-sidebar">×</button>
+        </div>
+        <ul id="favoritesList"></ul>
+        <button id="clearFavoritesBtn" class="secondary-btn">
+            Clear Favorites
+        </button>
+    </aside>
+
+    <!-- Word Details Modal -->
+    <div id="wordModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalWordTitle"></h3>
+                <button class="close-modal">×</button>
+            </div>
+            <div id="modalWordDetails" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="modalCopyBtn" class="secondary-btn">
+                    Copy
+                </button>
+                <button id="modalFavoriteBtn" class="primary-btn">
+                    <span>Add to Favorites</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
