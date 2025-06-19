@@ -166,18 +166,13 @@ async function copyToClipboard(text) {
 
 
 async function findWords() {
-    console.log('findWords called'); 
     const input = document.getElementById('searchInput');
-    console.log('Input element:', input); 
-    
     if (!input) {
         console.error('Search input element not found');
         return;
     }
     
     const searchTerm = input.value.toLowerCase().trim();
-    console.log('Search term:', searchTerm); 
-    
     const resultList = document.getElementById('resultList');
     const filter = parseInt(document.getElementById('lengthFilter').value);
     const condition = document.getElementById('lengthCondition').value;
@@ -194,15 +189,11 @@ async function findWords() {
     addHistory(searchTerm);
     
     try {
-        console.log('Fetching words for:', searchTerm); // Debug 
         const response = await fetch(`https://api.datamuse.com/words?sp=*${searchTerm}*`);
         if (!response.ok) throw new Error('Network response was not ok');
         
         const data = await response.json();
-        console.log('API response:', data); 
-        
         let words = data.map(item => item.word);
-        
         
         if (filter > 0) {
             words = words.filter(word => {
@@ -213,15 +204,12 @@ async function findWords() {
             });
         }
         
-       
         words.sort((a, b) => a.length - b.length);
         
         if (words.length === 0) {
             resultList.innerHTML = '<li class="no-results">No words found</li>';
             return;
         }
-        
-        console.log('Filtered words:', words); // Debug 
         
         words.forEach(word => {
             const li = document.createElement('li');
@@ -233,9 +221,9 @@ async function findWords() {
         window.wordsList = words;
         
     } catch (error) {
-        console.error('Search error:', error); 
-        showToast('Error fetching words. Please try again.', 'error');
-        resultList.innerHTML = '<li class="error">Error fetching words</li>';
+        console.error('Search error:', error);
+        showToast('Error fetching words. Please check your internet connection and try again.', 'error');
+        resultList.innerHTML = '<li class="error">Error fetching words. Please check your internet connection and try again.</li>';
     } finally {
         loading.classList.add('hidden');
     }
